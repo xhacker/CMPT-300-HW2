@@ -9,8 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    paused = false;
 }
 
 MainWindow::~MainWindow()
@@ -20,18 +18,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_runButton_clicked()
 {
-    total_operators = ui->operatorsSpinBox->value();
-    total_tools = ui->toolsSpinBox->value();
-
     ui->pauseButton->setEnabled(true);
 
-    cout << "Running: " << total_operators << " operators, " << total_tools << " tools." << endl;
+    runner.total_operators = ui->operatorsSpinBox->value();
+    runner.total_tools = ui->toolsSpinBox->value();
+    runner.run();
 }
 
 void MainWindow::on_pauseButton_clicked()
 {
-    paused = !paused;
-    if (paused) {
+    runner.paused = !runner.paused;
+    if (runner.paused) {
         ui->pauseButton->setText("Resume");
     }
     else {

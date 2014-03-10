@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "runner.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,14 +18,13 @@ public:
 
 private slots:
     void on_runButton_clicked();
-
     void on_pauseButton_clicked();
 
 private:
+    void run();
+
     Ui::MainWindow *ui;
-    int total_operators;
-    int total_tools;
-    bool paused;
+    Runner runner;
 };
 
 #endif // MAINWINDOW_H
