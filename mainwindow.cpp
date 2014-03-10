@@ -16,9 +16,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::update_input(QList<char> buffer)
+{
+    for (int i = 0; i < buffer.size(); ++i) {
+        cout << buffer[i];
+    }
+    cout << endl;
+}
+
 void MainWindow::on_runButton_clicked()
 {
     ui->pauseButton->setEnabled(true);
+
+//    QObject::connect(&runner, SIGNAL(input_changed(QList<char>)),
+//                     this, SLOT(update_input(QList<char>)));
 
     runner.total_operators = ui->operatorsSpinBox->value();
     runner.total_tools = ui->toolsSpinBox->value();

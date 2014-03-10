@@ -17,9 +17,7 @@ void Generator::run()
         QThread::msleep(rand_int(10, 1000));
 
         runner->input_mutex.lock();
-        if (runner->input_buffer.size() < 10) {
-            runner->input_buffer.append(material);
-        }
+        runner->check_and_append_input(material);
         runner->input_mutex.unlock();
     }
 }

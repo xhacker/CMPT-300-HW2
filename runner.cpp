@@ -9,6 +9,14 @@ Runner::Runner() : paused(false)
 {
 }
 
+void Runner::check_and_append_input(char m)
+{
+    if (input_buffer.size() < 10) {
+        input_buffer.append(m);
+//        emit input_changed(input_buffer);
+    }
+}
+
 void Runner::run()
 {
     cout << "Running: " << total_operators << " operators, " << total_tools << " tools." << endl;
@@ -20,12 +28,4 @@ void Runner::run()
     g1->start();
     g2->start();
     g3->start();
-
-    while (true) {
-        sleep(1);
-        for (int i = 0; i < input_buffer.size(); ++i) {
-            cout << input_buffer[i];
-        }
-        cout << endl;
-    }
 }

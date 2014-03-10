@@ -7,6 +7,7 @@
 class Generator : public QThread
 {
     Q_OBJECT
+
 public:
     Generator(QObject *parent = 0, Runner *runner = 0, char material = 'A');
 

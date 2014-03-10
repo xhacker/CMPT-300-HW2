@@ -20,9 +20,10 @@ private slots:
     void on_runButton_clicked();
     void on_pauseButton_clicked();
 
-private:
-    void run();
+public slots:
+    void update_input(QList<char>);
 
+private:
     Ui::MainWindow *ui;
     Runner runner;
 };
