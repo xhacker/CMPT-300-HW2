@@ -26,38 +26,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QPushButton" name="runButton">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>44</y>
-      <width>142</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>Operators</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>227</x>
-      <y>44</y>
-      <width>142</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>Tools</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>394</x>
+      <x>320</x>
       <y>40</y>
-      <width>81</width>
+      <width>101</width>
       <height>32</height>
      </rect>
     </property>
@@ -81,7 +55,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>227</x>
+      <x>190</x>
       <y>24</y>
       <width>62</width>
       <height>16</height>
@@ -249,12 +223,15 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pauseButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>486</x>
+      <x>430</x>
       <y>40</y>
-      <width>81</width>
+      <width>101</width>
       <height>32</height>
      </rect>
     </property>
@@ -378,6 +355,44 @@
       <string>Operator 2: TT, AB, producing X</string>
      </property>
     </item>
+   </widget>
+   <widget class="QSpinBox" name="operatorsSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>44</y>
+      <width>100</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>10</number>
+    </property>
+    <property name="value">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="toolsSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>44</y>
+      <width>100</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>2</number>
+    </property>
+    <property name="maximum">
+     <number>10</number>
+    </property>
+    <property name="value">
+     <number>3</number>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
