@@ -13,7 +13,7 @@ void Runner::check_and_append_input(char m)
 {
     if (input_buffer.size() < 10) {
         input_buffer.append(m);
-//        emit input_changed(input_buffer);
+        emit input_changed(input_buffer);
     }
 }
 

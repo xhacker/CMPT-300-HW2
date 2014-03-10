@@ -5,9 +5,9 @@
 #include <QList>
 #include <QMutex>
 
-class Runner// : public QObject
+class Runner : public QObject
 {
-//    Q_OBJECT
+    Q_OBJECT
 
 public:
     Runner();
@@ -21,8 +21,8 @@ public:
     QMutex input_mutex;
     QList<char> output_queue;
 
-//signals:
-//    void input_changed(QList<char> input_buffer);
+signals:
+    void input_changed(QList<char> input_buffer);
 };
 
 #endif // RUNNER_H

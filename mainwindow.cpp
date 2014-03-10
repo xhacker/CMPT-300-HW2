@@ -28,8 +28,9 @@ void MainWindow::on_runButton_clicked()
 {
     ui->pauseButton->setEnabled(true);
 
-//    QObject::connect(&runner, SIGNAL(input_changed(QList<char>)),
-//                     this, SLOT(update_input(QList<char>)));
+    qRegisterMetaType<QList<char> >("QList<char>");
+    QObject::connect(&runner, SIGNAL(input_changed(QList<char>)),
+                     this, SLOT(update_input(QList<char>)));
 
     runner.total_operators = ui->operatorsSpinBox->value();
     runner.total_tools = ui->toolsSpinBox->value();

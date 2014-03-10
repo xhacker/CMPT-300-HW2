@@ -14,11 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    runner.cpp \
-    generator.cpp
+    generator.cpp \
+    runner.cpp
 
 HEADERS  += mainwindow.h \
-    runner.h \
-    generator.h
+    generator.h \
+    runner.h
 
 FORMS    += mainwindow.ui
