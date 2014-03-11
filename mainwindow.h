@@ -24,6 +24,7 @@ private slots:
 public slots:
     void update_input(QList<char>);
     void update_output(QList<char>);
+    void update_log(QString log);
 
 private:
     Ui::MainWindow *ui;

@@ -28,6 +28,11 @@ bool Runner::check_and_add_output(char p)
     return false;
 }
 
+void Runner::add_log(QString log)
+{
+    emit log_added(log);
+}
+
 char Runner::take_material()
 {
     char m = input_buffer.takeLast();

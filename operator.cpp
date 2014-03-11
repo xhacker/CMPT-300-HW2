@@ -24,6 +24,7 @@ void Operator::run()
         if (runner->input_buffer.size() >= 2) {
             m1 = runner->take_material();
             m2 = runner->take_material();
+#warning m2 shouldn't be equal to m1
         }
         runner->input_mutex.unlock();
 
@@ -32,8 +33,6 @@ void Operator::run()
             m1 = m2;
             m2 = m;
         }
-
-        QThread::msleep(rand_int(10, 1000));
 
         char product;
         if (m1 == 'A' && m2 == 'B') {
@@ -46,6 +45,10 @@ void Operator::run()
             // m1 == 'B' && m2 == 'C'
             product = 'Z';
         }
+
+        runner->add_log(QString("[OP #%1] Producing %2.").arg(QString::number(id), QString(product)));
+
+        QThread::msleep(rand_int(10, 1000));
 
         runner->output_mutex.lock();
         runner->check_and_add_output(product);

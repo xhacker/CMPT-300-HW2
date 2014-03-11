@@ -165,16 +165,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QListView" name="operatorsListView">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>200</y>
-      <width>231</width>
-      <height>116</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QTextBrowser" name="materialsBrowser">
     <property name="enabled">
      <bool>true</bool>
@@ -218,6 +208,16 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;X: 0&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Y: 0&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Z: 0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="logBrowser">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>200</y>
+      <width>231</width>
+      <height>116</height>
+     </rect>
     </property>
    </widget>
   </widget>

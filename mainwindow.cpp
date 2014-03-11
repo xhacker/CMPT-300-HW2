@@ -61,6 +61,11 @@ void MainWindow::update_output(QList<char> queue)
                                        QString::number(count[2])));
 }
 
+void MainWindow::update_log(QString log)
+{
+    ui->logBrowser->setText(log + "\n" + ui->logBrowser->toPlainText());
+}
+
 void MainWindow::on_runButton_clicked()
 {
     ui->pauseButton->setEnabled(true);
@@ -70,6 +75,8 @@ void MainWindow::on_runButton_clicked()
                      this, SLOT(update_input(QList<char>)));
     QObject::connect(&runner, SIGNAL(output_changed(QList<char>)),
                      this, SLOT(update_output(QList<char>)));
+    QObject::connect(&runner, SIGNAL(log_added(QString)),
+                     this, SLOT(update_log(QString)));
 
     runner.total_operators = ui->operatorsSpinBox->value();
     runner.total_tools = ui->toolsSpinBox->value();

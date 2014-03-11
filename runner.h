@@ -14,6 +14,7 @@ public:
     void run();
     void check_and_add_input(char);
     bool check_and_add_output(char);
+    void add_log(QString);
     char take_material();
 
     int total_operators;
@@ -27,6 +28,7 @@ public:
 signals:
     void input_changed(QList<char> input_buffer);
     void output_changed(QList<char> output_queue);
+    void log_added(QString log);
 };
 
 #endif // RUNNER_H
