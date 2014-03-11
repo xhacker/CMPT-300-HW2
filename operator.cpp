@@ -18,6 +18,18 @@ void Operator::run()
     while (true) {
         QThread::msleep(50);
 
+        if (product) {
+            runner->output_mutex.lock();
+            if (runner->check_and_add_output(product)) {
+                product = 0;
+                m1 = m2 = 0;
+                tools = 0;
+                runner->back_tool(2);
+            }
+            runner->output_mutex.unlock();
+            continue;
+        }
+
         if (m1 == 0) {
             runner->input_mutex.lock();
             m1 = runner->take_material();
@@ -49,29 +61,22 @@ void Operator::run()
             continue;
         }
 
-        char product;
+        char p;
         if (m1 == 'A' && m2 == 'B') {
-            product = 'X';
+            p = 'X';
         }
         else if (m1 == 'A' && m2 == 'C') {
-            product = 'Y';
+            p = 'Y';
         }
         else {
             // m1 == 'B' && m2 == 'C'
-            product = 'Z';
+            p = 'Z';
         }
 
-        runner->add_log(QString("[OP #%1] Producing %2.").arg(QString::number(id), QString(product)));
+        runner->add_log(QString("[OP #%1] Producing %2.").arg(QString::number(id), QString(p)));
 
         QThread::msleep(rand_int(10, 1000));
 
-        runner->output_mutex.lock();
-        runner->check_and_add_output(product);
-#warning if not added, add next time
-        runner->output_mutex.unlock();
-
-        m1 = m2 = 0;
-        tools = 0;
-        runner->back_tool(2);
+        product = p;
     }
 }
