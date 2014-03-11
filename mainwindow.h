@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "runner.h"
+#include <QStringListModel>
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +27,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     Runner runner;
+    QStringListModel *input_model;
 };
 
 #endif // MAINWINDOW_H

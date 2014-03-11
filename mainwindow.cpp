@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QStringListModel>
 #include <iostream>
 
 using namespace std;
@@ -18,10 +19,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::update_input(QList<char> buffer)
 {
+    input_model = new QStringListModel(0);
+    QStringList List;
+
     for (int i = 0; i < buffer.size(); ++i) {
-        cout << buffer[i];
+        List.append(QString(buffer[i]));
     }
-    cout << endl;
+
+    input_model->setStringList(List);
+    ui->inputListView->setModel(input_model);
 }
 
 void MainWindow::on_runButton_clicked()

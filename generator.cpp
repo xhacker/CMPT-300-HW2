@@ -14,7 +14,9 @@ int Generator::rand_int(int low, int high)
 void Generator::run()
 {
     while (true) {
-        QThread::msleep(rand_int(10, 1000));
+        int ms = rand_int(10, 1000);
+        QThread::msleep(ms);
+        printf("%d\n", ms);
 
         runner->input_mutex.lock();
         runner->check_and_append_input(material);
