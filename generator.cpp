@@ -1,6 +1,5 @@
 #include "generator.h"
 #include <QTime>
-#include <cstdio>
 
 Generator::Generator(QObject *parent, Runner *runner, char material) :
     QThread(parent), runner(runner), material(material)

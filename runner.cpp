@@ -1,5 +1,6 @@
 #include "runner.h"
 #include "generator.h"
+#include "operator.h"
 #include <iostream>
 #include <unistd.h>
 
@@ -28,4 +29,9 @@ void Runner::run()
     g1->start();
     g2->start();
     g3->start();
+
+    for (int i = 1; i <= total_operators; ++i) {
+        Operator *op = new Operator(0, this, i);
+        op->start();
+    }
 }

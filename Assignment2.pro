@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     generator.cpp \
-    runner.cpp
+    runner.cpp \
+    operator.cpp
 
 HEADERS  += mainwindow.h \
     generator.h \
-    runner.h
+    runner.h \
+    operator.h
 
 FORMS    += mainwindow.ui
