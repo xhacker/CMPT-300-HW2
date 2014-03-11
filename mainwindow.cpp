@@ -70,6 +70,7 @@ void MainWindow::on_runButton_clicked()
 {
     ui->pauseButton->setEnabled(true);
     ui->runButton->setEnabled(false);
+    ui->runButton->setText("Restart");
 
     qRegisterMetaType<QList<char> >("QList<char>");
     QObject::connect(&runner, SIGNAL(input_changed(QList<char>)),

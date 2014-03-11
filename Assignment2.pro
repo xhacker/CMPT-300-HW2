@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     generator.cpp \
     runner.cpp \
-    operator.cpp
+    operator.cpp \
+    watchdog.cpp
 
 HEADERS  += mainwindow.h \
     generator.h \
     runner.h \
-    operator.h
+    operator.h \
+    watchdog.h
 
 FORMS    += mainwindow.ui

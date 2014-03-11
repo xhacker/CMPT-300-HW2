@@ -1,13 +1,21 @@
 #include "runner.h"
 #include "generator.h"
 #include "operator.h"
+#include "watchdog.h"
 #include <iostream>
 #include <unistd.h>
 
 using namespace std;
 
 Runner::Runner() : paused(false)
-{   
+{
+    timer.start();
+    refresh_activity_time();
+}
+
+void Runner::refresh_activity_time()
+{
+    last_activity_time = timer.elapsed();
 }
 
 void Runner::check_and_add_input(char m)
@@ -15,6 +23,7 @@ void Runner::check_and_add_input(char m)
     if (input_buffer.size() < 10) {
         input_buffer.prepend(m);
         emit input_changed(input_buffer);
+        refresh_activity_time();
     }
 }
 
@@ -23,6 +32,7 @@ bool Runner::check_and_add_output(char p)
     if (output_queue.size() == 0 || output_queue.first() != p) {
         output_queue.prepend(p);
         emit output_changed(output_queue);
+        refresh_activity_time();
         return true;
     }
     return false;
@@ -41,6 +51,7 @@ char Runner::take_material()
 
     char m = input_buffer.takeLast();
     emit input_changed(input_buffer);
+    refresh_activity_time();
     return m;
 }
 
@@ -54,6 +65,7 @@ char Runner::take_material_exclude(char exclude)
     if (m != exclude) {
         input_buffer.removeLast();
         emit input_changed(input_buffer);
+        refresh_activity_time();
         return m;
     }
     return 0;
@@ -64,6 +76,7 @@ bool Runner::take_tool()
     if (remain_tools > 0) {
         remain_tools -= 1;
         emit input_changed(input_buffer);
+        refresh_activity_time();
         return true;
     }
     return false;
@@ -73,6 +86,7 @@ void Runner::back_tool(int amount)
 {
     remain_tools += amount;
     emit input_changed(input_buffer);
+    refresh_activity_time();
 }
 
 void Runner::run()
@@ -91,4 +105,7 @@ void Runner::run()
         Operator *op = new Operator(0, this, i);
         op->start();
     }
+
+    Watchdog *dog = new Watchdog(0, this);
+    dog->start();
 }
