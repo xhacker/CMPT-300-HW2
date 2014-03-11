@@ -23,11 +23,13 @@ private slots:
 
 public slots:
     void update_input(QList<char>);
+    void update_output(QList<char>);
 
 private:
     Ui::MainWindow *ui;
     Runner runner;
     QStringListModel *input_model;
+    QStringListModel *output_model;
 };
 
 #endif // MAINWINDOW_H

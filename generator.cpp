@@ -19,7 +19,7 @@ void Generator::run()
         QThread::msleep(rand_int(10, 1000));
 
         runner->input_mutex.lock();
-        runner->check_and_append_input(material);
+        runner->check_and_add_input(material);
         runner->input_mutex.unlock();
     }
 }

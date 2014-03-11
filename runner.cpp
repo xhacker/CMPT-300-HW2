@@ -10,12 +10,29 @@ Runner::Runner() : paused(false)
 {   
 }
 
-void Runner::check_and_append_input(char m)
+void Runner::check_and_add_input(char m)
 {
     if (input_buffer.size() < 10) {
-        input_buffer.append(m);
+        input_buffer.prepend(m);
         emit input_changed(input_buffer);
     }
+}
+
+bool Runner::check_and_add_output(char p)
+{
+    if (output_queue.size() == 0 || output_queue.first() != p) {
+        output_queue.prepend(p);
+        emit output_changed(output_queue);
+        return true;
+    }
+    return false;
+}
+
+char Runner::take_material()
+{
+    char m = input_buffer.takeLast();
+    emit input_changed(input_buffer);
+    return m;
 }
 
 void Runner::run()

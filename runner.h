@@ -12,7 +12,9 @@ class Runner : public QObject
 public:
     Runner();
     void run();
-    void check_and_append_input(char);
+    void check_and_add_input(char);
+    bool check_and_add_output(char);
+    char take_material();
 
     int total_operators;
     int total_tools;
@@ -20,9 +22,11 @@ public:
     QList<char> input_buffer;
     QMutex input_mutex;
     QList<char> output_queue;
+    QMutex output_mutex;
 
 signals:
     void input_changed(QList<char> input_buffer);
+    void output_changed(QList<char> output_queue);
 };
 
 #endif // RUNNER_H

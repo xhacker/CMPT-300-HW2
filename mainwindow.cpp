@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    input_model = new QStringListModel(0);
+    output_model = new QStringListModel(0);
 }
 
 MainWindow::~MainWindow()
@@ -19,7 +22,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::update_input(QList<char> buffer)
 {
-    input_model = new QStringListModel(0);
     QStringList List;
 
     int count[3] = {0};
@@ -39,6 +41,26 @@ void MainWindow::update_input(QList<char> buffer)
                                        QString::number(runner.total_tools)));
 }
 
+void MainWindow::update_output(QList<char> queue)
+{
+    QStringList List;
+
+    int count[3] = {0};
+
+    for (int i = 0; i < queue.size(); ++i) {
+        List.append(QString(queue[i]));
+        count[queue[i] - 'X'] += 1;
+    }
+
+    output_model->setStringList(List);
+    ui->outputListView->setModel(output_model);
+
+    ui->productsBrowser->setText(QString("X: %1\nY: %2\nZ: %3\n")
+                                  .arg(QString::number(count[0]),
+                                       QString::number(count[1]),
+                                       QString::number(count[2])));
+}
+
 void MainWindow::on_runButton_clicked()
 {
     ui->pauseButton->setEnabled(true);
@@ -46,6 +68,8 @@ void MainWindow::on_runButton_clicked()
     qRegisterMetaType<QList<char> >("QList<char>");
     QObject::connect(&runner, SIGNAL(input_changed(QList<char>)),
                      this, SLOT(update_input(QList<char>)));
+    QObject::connect(&runner, SIGNAL(output_changed(QList<char>)),
+                     this, SLOT(update_output(QList<char>)));
 
     runner.total_operators = ui->operatorsSpinBox->value();
     runner.total_tools = ui->toolsSpinBox->value();
