@@ -16,15 +16,14 @@ int Operator::rand_int(int low, int high)
 void Operator::run()
 {
     while (true) {
-        QThread::msleep(50);
+        QThread::msleep(10);
 
         if (product) {
             runner->output_mutex.lock();
             if (runner->check_and_add_output(product)) {
+                runner->add_log(QString("[OP #%1] Put %2 in output queue.").arg(QString::number(id), QString(product)));
                 product = 0;
                 m1 = m2 = 0;
-                tools = 0;
-                runner->back_tool(2);
             }
             runner->output_mutex.unlock();
             continue;
@@ -83,5 +82,7 @@ void Operator::run()
         QThread::msleep(rand_int(10, 1000));
 
         product = p;
+        tools = 0;
+        runner->back_tool(2);
     }
 }
