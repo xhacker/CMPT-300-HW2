@@ -1,15 +1,12 @@
 #include "runner.h"
 #include "generator.h"
-#include <QTime>
 #include <iostream>
 #include <unistd.h>
 
 using namespace std;
 
 Runner::Runner() : paused(false)
-{
-    QTime time = QTime::currentTime();
-    qsrand((uint)time.msec());
+{   
 }
 
 void Runner::check_and_append_input(char m)
