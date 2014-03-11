@@ -38,7 +38,7 @@ void MainWindow::update_input(QList<char> buffer)
                                   .arg(QString::number(count[0]),
                                        QString::number(count[1]),
                                        QString::number(count[2]),
-                                       QString::number(runner.total_tools)));
+                                       QString::number(runner.remain_tools)));
 }
 
 void MainWindow::update_output(QList<char> queue)
@@ -69,6 +69,7 @@ void MainWindow::update_log(QString log)
 void MainWindow::on_runButton_clicked()
 {
     ui->pauseButton->setEnabled(true);
+    ui->runButton->setEnabled(false);
 
     qRegisterMetaType<QList<char> >("QList<char>");
     QObject::connect(&runner, SIGNAL(input_changed(QList<char>)),
@@ -80,6 +81,7 @@ void MainWindow::on_runButton_clicked()
 
     runner.total_operators = ui->operatorsSpinBox->value();
     runner.total_tools = ui->toolsSpinBox->value();
+    runner.remain_tools = runner.total_tools;
     runner.run();
 }
 

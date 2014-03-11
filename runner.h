@@ -16,10 +16,14 @@ public:
     bool check_and_add_output(char);
     void add_log(QString);
     char take_material();
+    bool take_tool();
+    void back_tool(int);
 
+    bool paused;
     int total_operators;
     int total_tools;
-    bool paused;
+    int remain_tools;
+    QMutex tool_mutex;
     QList<char> input_buffer;
     QMutex input_mutex;
     QList<char> output_queue;

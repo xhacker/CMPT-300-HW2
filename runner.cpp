@@ -35,9 +35,29 @@ void Runner::add_log(QString log)
 
 char Runner::take_material()
 {
+    if (input_buffer.size() == 0) {
+        return 0;
+    }
+
     char m = input_buffer.takeLast();
     emit input_changed(input_buffer);
     return m;
+}
+
+bool Runner::take_tool()
+{
+    if (remain_tools > 0) {
+        remain_tools -= 1;
+        emit input_changed(input_buffer);
+        return true;
+    }
+    return false;
+}
+
+void Runner::back_tool(int amount)
+{
+    remain_tools += amount;
+    emit input_changed(input_buffer);
 }
 
 void Runner::run()

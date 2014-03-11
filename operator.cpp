@@ -18,20 +18,35 @@ void Operator::run()
     while (true) {
         QThread::msleep(50);
 
-        char m1 = 0, m2 = 0;
-
-        runner->input_mutex.lock();
-        if (runner->input_buffer.size() >= 2) {
+        if (m1 == 0) {
+            runner->input_mutex.lock();
             m1 = runner->take_material();
-            m2 = runner->take_material();
-#warning m2 shouldn't be equal to m1
+            runner->input_mutex.unlock();
+            continue;
         }
-        runner->input_mutex.unlock();
+
+        if (m2 == 0) {
+            runner->input_mutex.lock();
+            m2 = runner->take_material();
+            runner->input_mutex.unlock();
+            continue;
+        }
+
+#warning m2 shouldn't be equal to m1
 
         if (m1 > m2) {
             char m = m1;
             m1 = m2;
             m2 = m;
+        }
+
+        if (tools < 2) {
+            runner->tool_mutex.lock();
+            if (runner->take_tool()) {
+                tools += 1;
+            }
+            runner->tool_mutex.unlock();
+            continue;
         }
 
         char product;
@@ -54,5 +69,9 @@ void Operator::run()
         runner->check_and_add_output(product);
 #warning if not added, add next time
         runner->output_mutex.unlock();
+
+        m1 = m2 = 0;
+        tools = 0;
+        runner->back_tool(2);
     }
 }

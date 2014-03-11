@@ -21,6 +21,8 @@ private:
 
     Runner *runner;
     int id;
+    int tools = 0;
+    char m1 = 0, m2 = 0;
 };
 
 #endif // OPERATOR_H
