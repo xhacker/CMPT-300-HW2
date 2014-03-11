@@ -44,6 +44,21 @@ char Runner::take_material()
     return m;
 }
 
+char Runner::take_material_exclude(char exclude)
+{
+    if (input_buffer.size() == 0) {
+        return 0;
+    }
+
+    char m = input_buffer.last();
+    if (m != exclude) {
+        input_buffer.removeLast();
+        emit input_changed(input_buffer);
+        return m;
+    }
+    return 0;
+}
+
 bool Runner::take_tool()
 {
     if (remain_tools > 0) {

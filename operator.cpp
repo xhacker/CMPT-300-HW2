@@ -34,17 +34,21 @@ void Operator::run()
             runner->input_mutex.lock();
             m1 = runner->take_material();
             runner->input_mutex.unlock();
+            if (m1) {
+                runner->add_log(QString("[OP #%1] Take %2.").arg(QString::number(id), QString(m1)));
+            }
             continue;
         }
 
         if (m2 == 0) {
             runner->input_mutex.lock();
-            m2 = runner->take_material();
+            m2 = runner->take_material_exclude(m1);
             runner->input_mutex.unlock();
+            if (m2) {
+                runner->add_log(QString("[OP #%1] Take %2.").arg(QString::number(id), QString(m2)));
+            }
             continue;
         }
-
-#warning m2 shouldn't be equal to m1
 
         if (m1 > m2) {
             char m = m1;
@@ -56,6 +60,7 @@ void Operator::run()
             runner->tool_mutex.lock();
             if (runner->take_tool()) {
                 tools += 1;
+                runner->add_log(QString("[OP #%1] Take tool.").arg(QString::number(id)));
             }
             runner->tool_mutex.unlock();
             continue;
