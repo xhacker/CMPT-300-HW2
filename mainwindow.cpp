@@ -22,12 +22,21 @@ void MainWindow::update_input(QList<char> buffer)
     input_model = new QStringListModel(0);
     QStringList List;
 
+    int count[3] = {0};
+
     for (int i = 0; i < buffer.size(); ++i) {
         List.append(QString(buffer[i]));
+        count[buffer[i] - 'A'] += 1;
     }
 
     input_model->setStringList(List);
     ui->inputListView->setModel(input_model);
+
+    ui->materialsBrowser->setText(QString("A: %1\nB: %2\nC: %3\nTools: %4\n")
+                                  .arg(QString::number(count[0]),
+                                       QString::number(count[1]),
+                                       QString::number(count[2]),
+                                       QString::number(runner.total_tools)));
 }
 
 void MainWindow::on_runButton_clicked()
