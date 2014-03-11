@@ -9,6 +9,9 @@ Watchdog::Watchdog(QObject *parent, Runner *runner) :
 
 void Watchdog::run()
 {
+    // hack to fix strange bug with reporting dead lock at start
+    QThread::msleep(4000);
+
     while (true) {
         QThread::msleep(100);
 

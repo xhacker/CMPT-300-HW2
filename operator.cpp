@@ -2,7 +2,8 @@
 #include <QTime>
 
 Operator::Operator(QObject *parent, Runner *runner, int id) :
-    QThread(parent), runner(runner), id(id)
+    QThread(parent), runner(runner), id(id),
+    tools(0), m1(0), m2(0), product(0), take_tool_attemp(0)
 {
     QTime time = QTime::currentTime();
     srand((uint)time.msec() + id);
@@ -56,12 +57,28 @@ void Operator::run()
         }
 
         if (tools < 2) {
+            if (tools == 1) {
+                take_tool_attemp += 1;
+            }
+
             runner->tool_mutex.lock();
             if (runner->take_tool()) {
                 tools += 1;
                 runner->add_log(QString("[OP #%1] Take tool.").arg(QString::number(id)));
             }
             runner->tool_mutex.unlock();
+
+            if (tools == 2) {
+                take_tool_attemp = 0;
+            }
+
+            if (take_tool_attemp >= 50) {
+                tools -= 1;
+                runner->back_tool(1);
+                runner->add_log(QString("[OP #%1] Put back tool.").arg(QString::number(id)));
+                take_tool_attemp = 0;
+            }
+
             continue;
         }
 

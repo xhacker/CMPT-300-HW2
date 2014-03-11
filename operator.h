@@ -21,9 +21,10 @@ private:
 
     Runner *runner;
     int id;
-    int tools = 0;
-    char m1 = 0, m2 = 0;
-    char product = 0;
+    int tools;
+    char m1, m2;
+    char product;
+    int take_tool_attemp;
 };
 
 #endif // OPERATOR_H
