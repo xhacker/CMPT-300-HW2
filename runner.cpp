@@ -29,7 +29,13 @@ void Runner::check_and_add_input(char m)
 
 bool Runner::check_and_add_output(char p)
 {
-    if (output_queue.size() == 0 || output_queue.first() != p) {
+    int count_X = output_queue.count('X');
+    int count_Y = output_queue.count('Y');
+    int count_Z = output_queue.count('Z');
+    int count_min = min(min(count_X, count_Y), count_Z);
+    int count_p = output_queue.count(p);
+
+    if (output_queue.size() == 0 || (output_queue.first() != p && count_p + 1 - count_min < 10)) {
         output_queue.prepend(p);
         emit output_changed(output_queue);
         refresh_activity_time();
