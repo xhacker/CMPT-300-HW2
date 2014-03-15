@@ -3,7 +3,7 @@ Dongyuan Liu
 
 This project is built upon Qt 4.8, it should be compilable under all platforms supported by Qt using Qt Creator (OS X 10.9 and Ubuntu 14.04 are tested).
 
-In case you don’t like Qt Creator, here is the command line way on Linux (Ubuntu 12.04 is tested):
+In case you don’t like Qt Creator, here is the command line way on Linux (Ubuntu 12.04 and 14.04 are tested):
 
 // make sure you have Qt 4.8 installed
 qmake Assignment2.pro
