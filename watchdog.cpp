@@ -20,7 +20,7 @@ void Watchdog::run()
         QThread::msleep(200);
 
         if (runner->timer.elapsed() - runner->last_activity_time > 1500) {
-            runner->add_log("[Warning] Dead lock detected.");
+            runner->add_log("[Warning] Deadlock detected.");
             printf("Dead lock: %d, %d.\n", runner->timer.elapsed(), runner->last_activity_time);
             break;
         }
