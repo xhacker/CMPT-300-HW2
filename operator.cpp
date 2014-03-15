@@ -45,7 +45,7 @@ void Operator::run()
         }
 
         if (m2 == 0) {
-            char output_top_p = runner->output_queue.first();
+            char output_top_p = runner->output_queue.isEmpty() ? 0 : runner->output_queue.first();
             char exclude = 0;
             if (output_top_p == 'X') {
                 if (m1 == 'A') {
