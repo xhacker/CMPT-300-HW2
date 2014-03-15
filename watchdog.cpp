@@ -13,7 +13,11 @@ void Watchdog::run()
     QThread::msleep(4000);
 
     while (true) {
-        QThread::msleep(100);
+        while (runner->paused) {
+            QThread::msleep(100);
+        }
+
+        QThread::msleep(200);
 
         if (runner->timer.elapsed() - runner->last_activity_time > 1500) {
             runner->add_log("[Warning] Dead lock detected.");

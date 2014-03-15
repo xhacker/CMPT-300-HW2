@@ -18,6 +18,10 @@ void Generator::run()
     while (true) {
         QThread::msleep(rand_int(10, 1000));
 
+        while (runner->paused) {
+            QThread::msleep(100);
+        }
+
         runner->input_mutex.lock();
         runner->check_and_add_input(material);
         runner->input_mutex.unlock();

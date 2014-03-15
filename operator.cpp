@@ -19,10 +19,14 @@ void Operator::run()
     while (true) {
         QThread::msleep(10);
 
+        while (runner->paused) {
+            QThread::msleep(100);
+        }
+
         if (product) {
             runner->output_mutex.lock();
             if (runner->check_and_add_output(product)) {
-                runner->add_log(QString("[OP #%1] Put %2 in output queue.").arg(QString::number(id), QString(product)));
+                runner->add_log(QString("[OP #%1] Put %2 into output queue.").arg(QString::number(id), QString(product)));
                 product = 0;
                 m1 = m2 = 0;
             }
@@ -97,6 +101,10 @@ void Operator::run()
         runner->add_log(QString("[OP #%1] Producing %2.").arg(QString::number(id), QString(p)));
 
         QThread::msleep(rand_int(10, 1000));
+
+        while (runner->paused) {
+            QThread::msleep(100);
+        }
 
         product = p;
         tools = 0;
