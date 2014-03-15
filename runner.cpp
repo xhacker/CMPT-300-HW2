@@ -61,7 +61,7 @@ char Runner::take_material()
     return m;
 }
 
-char Runner::take_material_exclude(char exclude)
+char Runner::take_material_exclude(char e1, char e2)
 {
     if (input_buffer.size() == 0) {
         return 0;
@@ -69,7 +69,7 @@ char Runner::take_material_exclude(char exclude)
 
     for (int i = input_buffer.size() - 1; i >= 0; --i) {
         char m = input_buffer[i];
-        if (m != exclude) {
+        if (m != e1 && m != e2) {
             input_buffer.removeAt(i);
             emit input_changed(input_buffer);
             refresh_activity_time();

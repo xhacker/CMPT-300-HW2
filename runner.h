@@ -17,7 +17,7 @@ public:
     bool check_and_add_output(char);
     void add_log(QString);
     char take_material();
-    char take_material_exclude(char);
+    char take_material_exclude(char, char);
     bool take_tool();
     void back_tool(int);
 

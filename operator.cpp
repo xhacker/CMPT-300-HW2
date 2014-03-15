@@ -45,8 +45,35 @@ void Operator::run()
         }
 
         if (m2 == 0) {
+            char output_top_p = runner->output_queue.first();
+            char exclude = 0;
+            if (output_top_p == 'X') {
+                if (m1 == 'A') {
+                    exclude = 'B';
+                }
+                else if (m1 == 'B') {
+                    exclude = 'A';
+                }
+            }
+            else if (output_top_p == 'Y') {
+                if (m1 == 'A') {
+                    exclude = 'C';
+                }
+                else if (m1 == 'C') {
+                    exclude = 'A';
+                }
+            }
+            else if (output_top_p == 'Z') {
+                if (m1 == 'B') {
+                    exclude = 'C';
+                }
+                else if (m1 == 'C') {
+                    exclude = 'B';
+                }
+            }
+
             runner->input_mutex.lock();
-            m2 = runner->take_material_exclude(m1);
+            m2 = runner->take_material_exclude(m1, exclude);
             runner->input_mutex.unlock();
             if (m2) {
                 runner->add_log(QString("[OP #%1] Take %2.").arg(QString::number(id), QString(m2)));
