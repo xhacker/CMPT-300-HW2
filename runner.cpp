@@ -61,13 +61,16 @@ char Runner::take_material_exclude(char exclude)
         return 0;
     }
 
-    char m = input_buffer.last();
-    if (m != exclude) {
-        input_buffer.removeLast();
-        emit input_changed(input_buffer);
-        refresh_activity_time();
-        return m;
+    for (int i = input_buffer.size() - 1; i >= 0; --i) {
+        char m = input_buffer[i];
+        if (m != exclude) {
+            input_buffer.removeAt(i);
+            emit input_changed(input_buffer);
+            refresh_activity_time();
+            return m;
+        }
     }
+
     return 0;
 }
 
